@@ -4,7 +4,11 @@ class TuringMachine {
     fun process(lst: List<String>, firstIndex: Int = 0, firstQ: Int = 0): List<String> {
         val newList = lst.toMutableList()
 
-        var i = firstIndex
+        var i = when(firstIndex){
+            -1 -> lst.size - 1
+            else -> firstIndex
+        }
+
         var q = firstQ
 
         while (true) {
@@ -20,6 +24,10 @@ class TuringMachine {
         }
 
         return newList
+    }
+
+    fun process(st: String, firstIndex: Int = 0, firstQ: Int = 0): String{
+        return process(st.map { it.toString() }, firstIndex, firstQ).joinToString("")
     }
 
     fun addAction(action: () -> TuringMachineResponse, q: Int, c: String) {
